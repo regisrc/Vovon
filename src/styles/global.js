@@ -8,7 +8,7 @@ export default createGlobalStyle`
       outline: 0;
     }
     body {
-      background: ${(props) => props.theme.colors.primaryWhite};
+      background: ${(props) => props.theme.colors.primaryGreen};
       color: ${(props) => props.theme.colors.primaryDark};
       -webkit-font-smoothing: antialiased;
       max-width: 1280px;

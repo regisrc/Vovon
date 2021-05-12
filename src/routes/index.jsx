@@ -5,6 +5,7 @@ import { ReactLoadingContainer } from './styles';
 
 const Main = lazy(() => import('../pages/Main'));
 const Dashboard = lazy(() => import('../pages/Dashboard'));
+const List = lazy(() => import('../pages/List'));
 
 const Loading = (
   <div>
@@ -17,6 +18,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={Main} />
       <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/list" component={List} />
     </Switch>
   </Suspense>
 );

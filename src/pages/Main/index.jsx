@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2"
 
 import {
   Container,
@@ -34,7 +35,22 @@ const Main = () => {
       let path = `dashboard`;
       history.push(path);
     } else {
-      alert("Login inválido!")
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'error',
+        title: 'Falha no login!'
+      })
     }
   }
 
@@ -48,16 +64,16 @@ const Main = () => {
         <ProfileImage src="https://avatars.githubusercontent.com/u/47003719?v=4"/>
         <InputContainer>
           <InputIcon src={user} />
-          <Input placeholder="Digite seu usuário..." value={login} onChange={event => setLogin(event.target.value)}/>
+          <Input placeholder="Digite seu usuário" value={login} onChange={event => setLogin(event.target.value)}/>
         </InputContainer>
         <InputContainer>
           <InputIcon src={passwordIcon} />
-          <Input placeholder="Digite sua senha..." type="password" value={password} onChange={event => setPassword(event.target.value)}/>
+          <Input placeholder="Digite sua senha" type="password" value={password} onChange={event => setPassword(event.target.value)}/>
         </InputContainer>
         <LoginButton onClick={buttonClick}>
           Entrar  
         </LoginButton>
-        <PasswordForgot onClick={() => alert("Recuperar Senha!")}>Esqueceu sua senha? <b>Clique aqui para recuperar</b></PasswordForgot>
+        <PasswordForgot onClick={() => alert("Recuperar Senha!")}>Esqueceu sua senha?</PasswordForgot>
       </LoginContainer>
     </Container>);
 };

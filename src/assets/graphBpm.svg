@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="467.377" height="220.5" viewBox="0 0 467.377 220.5">
+  <defs>
+    <filter id="line" x="0" y="75.313" width="467.377" height="113.24" filterUnits="userSpaceOnUse">
+      <feOffset dy="7" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="bg" x="321.01" y="94" width="88" height="43" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="BPM" transform="translate(-293.59 -120)">
+    <rect id="bg-2" data-name="bg" width="435" height="220" transform="translate(309.6 120)" opacity="0.08"/>
+    <g id="Chart" transform="translate(310 204.311)">
+      <path id="fill" d="M-18610-19297.51s-26.654,15.42-40.615-10.941-52.342,65.219-84.408,31.34-72.043,5.215-131.994,35.814-65.367-28.85-111.693-22.883-66.289-17.412-66.289-17.412v103.3h435Z" transform="translate(19044.598 19313.979)" fill="#f958ff" opacity="0.1"/>
+      <g transform="matrix(1, 0, 0, 1, -16.41, -84.31)" filter="url(#line)">
+        <path id="line-2" data-name="line" d="M-19045-19281.4s19.945,23.523,66.229,17.518,51.7,53.8,111.59,23.02,99.838-70.113,131.873-36.029,70.381-58.053,84.33-31.527,40.578,11.006,40.578,11.006" transform="translate(19061.41 19397.6)" fill="none" stroke="#f958ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+    <text id="BPM-2" data-name="BPM" transform="translate(371.6 163)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI" opacity="0.7"><tspan x="0" y="0">BPM</tspan></text>
+    <text id="_97" data-name="97" transform="translate(325.6 167)" fill="#fff" font-size="36" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">97</tspan></text>
+    <text id="Últimos_15_minutos" data-name="Últimos 15 minutos" transform="translate(325.6 191)" fill="#fff" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Últimos 15 minutos</tspan></text>
+    <g id="Hover" transform="translate(604.598 200)">
+      <g id="Chart_Hover" data-name="Chart Hover" transform="translate(-0.998)">
+        <line id="Linha_15" data-name="Linha 15" y2="139.5" transform="translate(7.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" stroke-dasharray="0 6"/>
+        <circle id="point" cx="7.5" cy="7.5" r="7.5" transform="translate(0 26.5)" fill="#f958ff" stroke="#353f6c" stroke-width="2"/>
+      </g>
+      <g id="Hover_Facet" data-name="Hover Facet" transform="translate(19.002 20)">
+        <g transform="matrix(1, 0, 0, 1, -330.01, -100)" filter="url(#bg)">
+          <g id="bg-3" data-name="bg" transform="translate(330.01 100)" fill="#3a4475" stroke="rgba(249,88,255,0.3)" stroke-width="1">
+            <rect width="70" height="25" rx="5" stroke="none"/>
+            <rect x="0.5" y="0.5" width="69" height="24" rx="4.5" fill="none"/>
+          </g>
+        </g>
+        <text id="_90_BPM" data-name="90 BPM" transform="translate(10 16)" fill="#fff" font-size="12" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">90</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

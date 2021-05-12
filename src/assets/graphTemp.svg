@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="467.627" height="220.5" viewBox="0 0 467.627 220.5">
+  <defs>
+    <filter id="line" x="0" y="91.947" width="467.627" height="87.918" filterUnits="userSpaceOnUse">
+      <feOffset dy="7" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="bg" x="322.213" y="108" width="88" height="43" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Income" transform="translate(-293.387 52)">
+    <rect id="bg-2" data-name="bg" width="435" height="220" transform="translate(309.599 -52)" opacity="0.08"/>
+    <g id="Chart" transform="translate(309.6 48.779)">
+      <path id="fill" d="M-18610-19297.51s-26.586,29.02-49.791,40.207-53.451,1.244-75.209-6.119c-.121-.074-69.375-38.359-134.885,0-77.771,45.578-78.58,2.754-109.039,2.943s-66.076,9.146-66.076,9.146v73.043h435Z" transform="translate(19044.998 19297.51)" fill="#58acff" opacity="0.1"/>
+      <g transform="matrix(1, 0, 0, 1, -16.21, -100.78)" filter="url(#line)">
+        <path id="line-2" data-name="line" d="M-19045.4-19250.676s56.271-14.2,73.432-7.693,33.639,27.811,69.822,11.834,70.414-47.93,130.77-28.994,66.273,26.627,92.9,24.854,68.076-45.562,68.076-45.562" transform="translate(19061.61 19397.6)" fill="none" stroke="#58acff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+    <text id="C_" data-name="Cº" transform="translate(406.599 -13)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI" opacity="0.7"><tspan x="0" y="0">Cº</tspan></text>
+    <text id="_37_8" data-name="37,8" transform="translate(325.599 -10)" fill="#fff" font-size="36" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">37,8</tspan></text>
+    <text id="Últimos_15_minutos" data-name="Últimos 15 minutos" transform="translate(328.599 12)" fill="#fff" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Últimos 15 minutos</tspan></text>
+    <g id="Hover" transform="translate(603.6 28)">
+      <g id="Chart_Hover" data-name="Chart Hover">
+        <line id="Linha_15" data-name="Linha 15" y2="139.5" transform="translate(7.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" stroke-dasharray="0 6"/>
+        <circle id="point" cx="7.5" cy="7.5" r="7.5" transform="translate(0 43.5)" fill="#58acff" stroke="#323a66" stroke-width="2"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -310.21, -80)" filter="url(#bg)">
+        <g id="bg-3" data-name="bg" transform="translate(331.21 114)" fill="#3a4475" stroke="rgba(249,88,255,0.3)" stroke-width="1">
+          <rect width="70" height="25" rx="5" stroke="none"/>
+          <rect x="0.5" y="0.5" width="69" height="24" rx="4.5" fill="none"/>
+        </g>
+      </g>
+      <text id="_90_BPM" data-name="90 BPM" transform="translate(31 50)" fill="#fff" font-size="12" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">36,9</tspan></text>
+    </g>
+  </g>
+</svg>

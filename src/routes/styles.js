@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ReactLoading from "react-loading";
 
 export const ReactLoadingContainer = styled(ReactLoading).attrs((props) => ({
-  color: props.theme.colors.primaryOrange,
+  color: props.theme.colors.primaryGreen,
   type: "balls",
   height: "64px",
   width: "64px",
