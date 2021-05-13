@@ -28,8 +28,8 @@ const Main = () => {
 
   const history = useHistory();
 
-  const buttonClick = () => {
-    var logged = ExecuteLogin(login, password)
+  const buttonClick = async () => {
+    var logged = await ExecuteLogin(login, password)
 
     if (logged) {
       let path = `dashboard`;

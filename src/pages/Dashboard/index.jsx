@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
   Container,
@@ -20,13 +20,15 @@ const messages = [
 ]
 
 const Dashboard = () => {
+  const { data } = Patients();
+
   return (
     <Container>
       <Header />
       <ComponentsContainer>
         <DashboardContainer>
-          {Patients &&
-            Patients.map((User, index) => (
+          {data &&
+            data.map((User, index) => (
                 <Card key={index} user={User} />
             ))
           }

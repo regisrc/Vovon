@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react"
 
 import {
   Container,
@@ -19,24 +20,44 @@ import {
 
 import dashboard from "../../assets/dashboard.svg"
 import list from "../../assets/list.svg"
-import profile from "../../assets/profile.png"
+
+import { date, hour } from "../../service/utils/date-format"
 
 const Header = () => {
   const Title = "Casa de Repouso Nova Esperança"
-  const Name = "Filipe";
-  const Email = "tcs2021@alunos.sc.senac.br";
   const Dash = "dashboard";
   const List = "list"
+  const [stateHour, setStateHour] = useState(hour);
+  const [stateDate, setStateDate] = useState(date);
+  const [changeHour, setChangeHour] = useState(true);
 
   const history = useHistory();
+
+  const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      await sleep(5000);
+      
+      setStateHour(hour)
+      setStateDate(date)
+      setChangeHour(true)
+      console.log("oi")
+    }
+
+    fetchData()
+    setChangeHour(false)
+  }, [setChangeHour]);
 
   return (
     <Container>
       <MenuBar>
         <InfosContainer>
           <DateArea>
-            <Hour>21:06</Hour>
-            <DateTime>Qua, 21 Abril 2021</DateTime>
+            <Hour>{stateHour}</Hour>
+            <DateTime>{stateDate}</DateTime>
           </DateArea>
           <GridDisplay onClick={() => history.push(Dash)}><ButtonIcon src={dashboard}/></GridDisplay>
           <GridDisplay onClick={() => history.push(List)}><ButtonIcon src={list} /></GridDisplay>

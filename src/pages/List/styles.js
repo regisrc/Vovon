@@ -18,13 +18,13 @@ export const Status = styled.div`
   border: 1px solid black;
 
   ${(props) =>
-    props.status === "1" &&
+    props.status === 1 &&
     css`
       background-color: ${(props) => props.theme.colors.secundaryYellow};
     `}
 
   ${(props) =>
-    props.status === "2" &&
+    props.status === 2 &&
     css`
       background-color: ${(props) => props.theme.colors.primaryRed};
     `}

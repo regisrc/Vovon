@@ -6,26 +6,27 @@ import {
 } from "./styles";
 import Header from "../../components/Header"
 import Patients from "../../api/patients"
-import { colors } from "../../styles/colors"
 
 const columns = [
   {
     title: 'Status',
-    field: 'status',
-    render: rowData => <Status status={rowData.status}/>
+    field: 'warningLevel',
+    render: rowData => <Status status={rowData.warningLevel}/>
   },
-  { title: 'Nome', field: 'user' },
-  { title: 'Batimentos', field: 'bpm.value' },
-  { title: 'Temperatura', field: 'temperatura.value' },
-  { title: 'Oxigenação', field: 'oxigenacao.value' },
+  { title: 'Nome', field: 'name' },
+  { title: 'Batimentos', field: 'bpm' },
+  { title: 'Temperatura', field: 'temp' },
+  { title: 'Oxigenação', field: 'oxig' },
 ];
 
 const List = () => {
+  const { data } = Patients();
+
   return (
     <Container>
       <Header />
       <div style={{ maxWidth: '100%', padding: '16px' }}>
-        <MaterialTable options={{ exportButton: true }} columns={columns} data={Patients} title='Lista de pacientes' />
+        <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de pacientes' />
       </div>
     </Container>)
 }

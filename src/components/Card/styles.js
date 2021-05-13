@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   height: 140px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(77, 182, 172, 0.5);
   cursor: pointer;
   margin: 10px;
 
@@ -106,16 +106,4 @@ export const SensorIcon = styled.img`
 export const SensorValue = styled.h3`
   font-weight: normal;
   color: white;
-
-  ${(props) =>
-    props.status === "1" &&
-    css`
-      color: ${(props) => props.theme.colors.secundaryYellow};
-    `}
-
-  ${(props) =>
-    props.status === "2" &&
-    css`
-      color: ${(props) => props.theme.colors.primaryRed};
-    `}
 `;

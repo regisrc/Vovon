@@ -14,7 +14,7 @@ export const ImagesContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 
-  background-color: ${(props) => props.theme.colors.primaryGreen};
+  background-color: ${(props) => props.theme.colors.secundaryGreen};
   height: 100vh;
   width: 70vw;
   overflow: hidden;
