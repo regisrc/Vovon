@@ -12,7 +12,7 @@ export const Patients = () => {
 
       return response.data;
     },
-    { refreshInterval: 1 }
+    { refreshInterval: 10000 }
   );
 
   return { data, error, mutate };

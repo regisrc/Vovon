@@ -1,4 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+import Swal from "sweetalert2"
+import useSound from 'use-sound';
 
 import {
   Container,
@@ -12,6 +14,7 @@ import {
 import Header from "../../components/Header"
 import Card from "../../components/Card"
 import Patients from "../../api/patients"
+import sound from '../../assets/sound.mp3';
 
 const messages = [
   { "message": "Claudio revisou TCS (9 min atrás)" },
@@ -21,6 +24,24 @@ const messages = [
 
 const Dashboard = () => {
   const { data } = Patients();
+  const [play] = useSound(sound);
+
+  useEffect(() => {
+    if (data?.find(x => x.warningLevel == 2)) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Existem pacientes em perigo!',
+        showConfirmButton: true
+      })
+    
+      for (let index = 0; index < 5; index++) {
+        play()
+      
+        new Promise(resolve => setTimeout(resolve, 2000));
+      }
+    }
+  }, [data])
 
   return (
     <Container>
