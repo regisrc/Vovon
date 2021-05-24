@@ -1,7 +1,7 @@
 import axios from "axios";
 import useSWR from "swr";
 
-export const Patients = () => {
+export const PatientsSWR = () => {
   const url =
     "https://1ixzg5dyf1.execute-api.sa-east-1.amazonaws.com/Stage/dashboard";
 
@@ -18,4 +18,13 @@ export const Patients = () => {
   return { data, error, mutate };
 };
 
-export default Patients;
+export const Patients = async () => {
+    const url =
+      "https://1ixzg5dyf1.execute-api.sa-east-1.amazonaws.com/Stage/dashboard";
+
+    const response = await axios(url);
+
+    return response.data;
+};
+
+export default PatientsSWR;

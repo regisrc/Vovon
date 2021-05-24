@@ -23,7 +23,7 @@ const Header = ({user}) => {
   const history = useHistory();
 
   return (
-    <Container>
+    <Container status={user.warningLevel}>
       <Section>
         <NameStatusArea>
           <Status status={user.warningLevel}/>

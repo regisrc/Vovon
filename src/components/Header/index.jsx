@@ -44,7 +44,6 @@ const Header = () => {
       setStateHour(hour)
       setStateDate(date)
       setChangeHour(true)
-      console.log("oi")
     }
 
     fetchData()

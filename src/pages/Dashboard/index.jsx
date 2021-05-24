@@ -13,7 +13,7 @@ import {
 } from "./styles";
 import Header from "../../components/Header"
 import Card from "../../components/Card"
-import Patients from "../../api/patients"
+import PatientsSWR from "../../api/patients"
 import sound from '../../assets/sound.mp3';
 
 const messages = [
@@ -23,7 +23,7 @@ const messages = [
 ]
 
 const Dashboard = () => {
-  const { data } = Patients();
+  const { data } = PatientsSWR();
   const [play] = useSound(sound);
 
   useEffect(() => {

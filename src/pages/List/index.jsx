@@ -1,11 +1,12 @@
 import MaterialTable from 'material-table';
+import React, { useState, useEffect } from 'react';
 
 import {
   Container,
   Status
 } from "./styles";
 import Header from "../../components/Header"
-import Patients from "../../api/patients"
+import { Patients } from "../../api/patients"
 
 const columns = [
   {
@@ -20,14 +21,23 @@ const columns = [
 ];
 
 const List = () => {
-  const { data } = Patients();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setData(await Patients())
+    }
+    
+    fetchData();
+  }, []);
 
   return (
     <Container>
       <Header />
-      <div style={{ maxWidth: '100%', padding: '16px' }}>
+      {data &&
+       <div style={{ maxWidth: '100%', padding: '16px' }}>
         <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de pacientes' />
-      </div>
+      </div> }
     </Container>)
 }
 

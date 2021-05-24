@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   height: 140px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-  background-color: rgba(77, 182, 172, 0.5);
+  background-color: rgba(77, 182, 172, 1);
   cursor: pointer;
   margin: 10px;
 
@@ -21,6 +21,12 @@ export const Container = styled.div`
   @media (max-width: 600px) {
     width: 100%;
   }
+
+  ${(props) =>
+    props.status === 2 &&
+    css`
+      background-color: ${(props) => props.theme.colors.secundaryRed};
+    `}
 `;
 
 export const Section = styled.div`
@@ -31,8 +37,9 @@ export const Section = styled.div`
   padding: 5px 28px;
 
   height: 40px;
-
   margin-bottom: 9px;
+
+  background-color: rgba(0,0,0,0.1);
 `;
 
 export const ColumnContainer = styled.div`

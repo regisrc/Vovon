@@ -104,6 +104,7 @@ export const Input = styled.input`
 export const LoginButton = styled.button`
   width: 80%;
   height: 50px;
+  min-height: 50px;
   margin: 10px 0px;
   margin-bottom: 20px;
 
