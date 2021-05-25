@@ -8,7 +8,7 @@ export const Container = styled.div`
   padding: 0;
   text-align: center;
 
-  height: 140px;
+  height: 160px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   background-color: rgba(77, 182, 172, 1);
   cursor: pointer;
@@ -39,7 +39,7 @@ export const Section = styled.div`
   height: 40px;
   margin-bottom: 9px;
 
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 export const ColumnContainer = styled.div`
@@ -113,4 +113,58 @@ export const SensorIcon = styled.img`
 export const SensorValue = styled.h3`
   font-weight: normal;
   color: white;
+`;
+
+export const DeviceStatus = styled.p`
+  color: white;
+  opacity: 70%;
+
+  :hover {
+    opacity: 100%;
+  }
+`;
+
+export const Warning = styled.p`
+  color: white;
+  opacity: 70%;
+
+  :hover {
+    opacity: 100%;
+  }
+
+  ${(props) =>
+    props.status === 2 &&
+    css`
+        animation: blinker 1s linear infinite;
+
+        @keyframes blinker {
+          50% {
+            opacity: 0;
+          }
+        }
+      };
+  `}
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+
+  justify-content: space-between;
+  padding: 5px 12px;
+  font-size: 14px;
+
+  ${(props) =>
+    props.status === 2 &&
+    css`
+        justify-content: center;
+        animation: blinker 1s linear infinite;
+
+        @keyframes blinker {
+          50% {
+            opacity: 0;
+          }
+        }
+      };
+  `}
 `;

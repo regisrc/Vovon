@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2"
 import useSound from 'use-sound';
 
@@ -25,14 +25,31 @@ const messages = [
 const Dashboard = () => {
   const { data } = PatientsSWR();
   const [play] = useSound(sound);
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+    
     if (data?.find(x => x.warningLevel == 2)) {
-      Swal.fire({
-        position: 'center',
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 10000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('click', Swal.close)
+        }
+      })
+
+      Toast.fire({
         icon: 'error',
-        title: 'Existem pacientes em perigo!',
-        showConfirmButton: true
+        title: 'Existem pacientes em perigo!'
       })
     
       for (let index = 0; index < 5; index++) {
@@ -45,7 +62,7 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <Header />
+      <Header page={'dash'}/>
       <ComponentsContainer>
         <DashboardContainer>
           {data &&

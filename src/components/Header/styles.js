@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -14,25 +14,19 @@ export const MenuBar = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
   background-color: ${(props) => props.theme.colors.secundaryGreen};
 `;
 
-export const UserArea = styled.div`
+export const ConfigArea = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 
   width: 17vw;
   height: 100%;
-
-  @media (max-width: 850px) {
-    width: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 `;
 
 export const UserProfile = styled.img`
@@ -74,9 +68,16 @@ export const ILPITitle = styled.h2`
   color: ${(props) => props.theme.colors.primaryWhite};
   padding: 10px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media (max-width: 850px) {
     font-size: 16px;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 0px;
   }
 `;
 
@@ -103,8 +104,14 @@ export const GridDisplay = styled.button`
   background-color: ${(props) => props.theme.colors.secundaryGreen};
   border: 0;
 
+  ${(props) =>
+    props.view &&
+    css`
+      background-color: ${(props) => props.theme.colors.quaternaryGreen};
+    `}
+
   :hover {
-    background-color: ${(props) => props.theme.colors.primaryGreen};
+    background-color: ${(props) => props.theme.colors.quintenaGreen};
   }
 
   @media (max-width: 850px) {

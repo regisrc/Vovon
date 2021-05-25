@@ -22,18 +22,26 @@ const columns = [
 
 const List = () => {
   const [data, setData] = useState(null);
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+
     const fetchData = async () => {
       setData(await Patients())
     }
     
     fetchData();
-  }, []);
+  }, [isMounted]);
 
   return (
     <Container>
-      <Header />
+      <Header page={'list'}/>
       {data &&
        <div style={{ maxWidth: '100%', padding: '16px' }}>
         <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de pacientes' />

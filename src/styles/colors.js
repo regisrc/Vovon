@@ -14,4 +14,6 @@ export const colors = {
   primaryGreen: "#b0c494",
   secundaryGreen: "#4db6ac",
   tertiaryGreen: "#39ff14",
+  quaternaryGreen: "#37D3C4",
+  quintenaGreen: "#1F4B47"
 };

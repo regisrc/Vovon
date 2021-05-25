@@ -11,16 +11,40 @@ import {
   Name,
   ExpandIcon,
   SensorIcon,
-  SensorValue
+  SensorValue,
+  Footer,
+  DeviceStatus,
+  Warning
 } from "./styles";
 
 import eye from "../../assets/eye.svg"
 import heart from "../../assets/heart.svg"
 import thermometer from "../../assets/thermometer.svg"
 import oximeter from "../../assets/oximeter.svg"
+import heartMono from "../../assets/heart-mono.svg"
+import thermometerMono from "../../assets/thermometer-mono.svg"
+import oximeterMono from "../../assets/oximeter-mono.svg"
+
 
 const Header = ({user}) => {
   const history = useHistory();
+  const [heartIcon, setHeartIcon] = useState(null);
+  const [temperatureIcon, setTemperatureIcon] = useState(null);
+  const [oxygenIcon, setOxygenIcon] = useState(null);
+
+  useEffect(() => {
+    const monocromaticIcons = localStorage.getItem('monocromatic');
+
+    if (monocromaticIcons === 'true') {
+      setHeartIcon(heartMono); 
+      setTemperatureIcon(thermometerMono)
+      setOxygenIcon(oximeterMono)
+    } else {
+      setHeartIcon(heart); 
+      setTemperatureIcon(thermometer)
+      setOxygenIcon(oximeter)
+    }
+  }, [])
 
   return (
     <Container status={user.warningLevel}>
@@ -33,18 +57,24 @@ const Header = ({user}) => {
       </Section>
       <ColumnContainer>
       <Column>
-        <SensorIcon src={heart} />
+        <SensorIcon src={heartIcon} />
         <SensorValue>{user.bpm}</SensorValue>
       </Column>
       <Column>
-        <SensorIcon src={thermometer} />
+        <SensorIcon src={temperatureIcon} />
         <SensorValue>{user.temp}</SensorValue>
       </Column>
       <Column>
-        <SensorIcon src={oximeter} />
+        <SensorIcon src={oxygenIcon} />
         <SensorValue>{user.oxig}</SensorValue>
       </Column>
       </ColumnContainer>
+      <Footer>
+        {user.warningLevel == 2 &&
+          <Warning status={user.warningLevel}>Perigo!</Warning>
+        }
+        <DeviceStatus status={user.warningLevel}>Conectado</DeviceStatus>
+      </Footer>
     </Container>)
 }
 
