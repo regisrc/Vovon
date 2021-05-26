@@ -7,6 +7,7 @@ const Main = lazy(() => import('../pages/Main'));
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const List = lazy(() => import('../pages/List'));
 const Config = lazy(() => import('../pages/Config'));
+const MedicalRecord = lazy(() => import('../pages/MedicalRecord'));
 
 const Loading = (
   <div>
@@ -21,6 +22,7 @@ const Routes = () => (
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/list" component={List} />
       <Route exact path="/config" component={Config} />
+      <Route path="/medicalRecord/:id" component={MedicalRecord} />
     </Switch>
   </Suspense>
 );

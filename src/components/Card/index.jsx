@@ -47,7 +47,7 @@ const Header = ({user}) => {
   }, [])
 
   return (
-    <Container status={user.warningLevel}>
+    <Container onClick={() => history.push(`medicalRecord/${user.id_wearable}`)} status={user.warningLevel}>
       <Section>
         <NameStatusArea>
           <Status status={user.warningLevel}/>

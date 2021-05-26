@@ -24,39 +24,44 @@ const messages = [
 
 const Dashboard = () => {
   const { data } = PatientsSWR();
-  const [play] = useSound(sound);
+  const [play, { stop, isPlaying }] = useSound(sound);
   const [isMounted, setIsMounted] = useState(false)
+  const [soundOff, setSoundOff] = useState(localStorage.getItem('sound') === 'true');
+  const [alertOff, setAlertOff] = useState(localStorage.getItem('alert') === 'true');
 
   useEffect(() => {
     setIsMounted(true)
+
     return () => setIsMounted(false)
   }, [])
-
+  
   useEffect(() => {
     if (!isMounted) return
     
     if (data?.find(x => x.warningLevel == 2)) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 10000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('click', Swal.close)
-        }
-      })
-
-      Toast.fire({
-        icon: 'error',
-        title: 'Existem pacientes em perigo!'
-      })
-    
-      for (let index = 0; index < 5; index++) {
+      if(!isPlaying && !soundOff)
         play()
-      
-        new Promise(resolve => setTimeout(resolve, 2000));
+
+      if (!alertOff) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 10000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('click', Swal.close)
+          }
+        })
+
+        Toast.fire({
+          icon: 'error',
+          title: 'Existem pacientes em perigo!'
+        })
       }
+    } else {
+      if (isPlaying && !soundOff)
+        stop()
     }
   }, [data])
 
