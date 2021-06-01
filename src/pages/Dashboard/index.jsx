@@ -15,6 +15,7 @@ import Header from "../../components/Header"
 import Card from "../../components/Card"
 import PatientsSWR from "../../api/patients"
 import sound from '../../assets/sound.mp3';
+import { FormatIndentDecreaseSharp } from '@material-ui/icons';
 
 const messages = [
   { "message": "Claudio revisou TCS (9 min atrás)" },
@@ -26,8 +27,8 @@ const Dashboard = () => {
   const { data } = PatientsSWR();
   const [play, { stop, isPlaying }] = useSound(sound);
   const [isMounted, setIsMounted] = useState(false)
-  const [soundOff, setSoundOff] = useState(localStorage.getItem('sound') === 'true');
-  const [alertOff, setAlertOff] = useState(localStorage.getItem('alert') === 'true');
+  const [soundOff] = useState(localStorage.getItem('sound') === 'true');
+  const [alertOff] = useState(localStorage.getItem('alert') === 'true');
 
   useEffect(() => {
     setIsMounted(true)
@@ -38,8 +39,16 @@ const Dashboard = () => {
   useEffect(() => {
     if (!isMounted) return
     
-    if (data?.find(x => x.warningLevel == 2)) {
-      if(!isPlaying && !soundOff)
+    const objectsWithWarning = data?.filter(x => x.warningLevel == 2);
+
+    if (objectsWithWarning) {
+      let retrievedObject = JSON.parse(localStorage.getItem('mutedObjects'));
+
+      let objectsWithWarningAndMuted = 0;
+
+      objectsWithWarning.forEach(x => retrievedObject.find(y => y.id == x.id_wearable) ? objectsWithWarningAndMuted++ : 0)
+
+      if(!isPlaying && !soundOff && objectsWithWarningAndMuted !== objectsWithWarning.length)
         play()
 
       if (!alertOff) {
@@ -72,7 +81,7 @@ const Dashboard = () => {
         <DashboardContainer>
           {data &&
             data.map((User, index) => (
-                <Card key={index} user={User} />
+              <Card key={index} user={User} />
             ))
           }
         </DashboardContainer>

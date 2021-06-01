@@ -34,7 +34,8 @@ export const Section = styled.div`
   flex-direction: row;
 
   justify-content: space-between;
-  padding: 5px 28px;
+  align-items: center;
+  padding: 5px 5px;
 
   height: 40px;
   margin-bottom: 9px;
@@ -96,12 +97,13 @@ export const Name = styled.h3`
   font-weight: normal;
 `;
 
-export const ExpandIcon = styled.img`
-  width: 32px;
-  height: 32px;
+export const MuteIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  opacity: 80%;
 
   :hover {
-    margin-top: 2px;
+    opacity: 100%;
   }
 `;
 

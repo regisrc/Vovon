@@ -30,8 +30,9 @@ const Main = () => {
 
   const buttonClick = async () => {
     var logged = await ExecuteLogin(login, password)
-
-    if (logged) {
+    
+    if (logged?.data?.token) {
+      localStorage.setItem('authToken', logged.data.token)
       let path = `dashboard`;
       history.push(path);
     } else {

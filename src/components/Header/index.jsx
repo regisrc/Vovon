@@ -1,6 +1,7 @@
 import { Redirect } from "react-router-dom";
 import { useState, useEffect } from "react"
 import Clock from 'react-live-clock';
+import 'moment/locale/pt';
 
 import {
   Container,
@@ -41,7 +42,7 @@ const Header = ({ page }) => {
   useEffect(() => {
     if (!isMounted) return
   }, []);
-
+  
   return (
     <Container>
       {exitPage && <Redirect to={route} />}
@@ -56,7 +57,8 @@ const Header = ({ page }) => {
               <Clock
                 format={'ddd, MMMM Mo, YYYY'}
                 ticking={true}
-                timezone={'America/Sao_Paulo'} />
+                timezone={'America/Sao_Paulo'} 
+                locale='pt'/>
             </DateTime>
           </DateArea>
           <GridDisplay view={page === 'dash'} onClick={() => pushOrGoBack(Dash)}><ButtonIcon src={dashboard}/></GridDisplay>
