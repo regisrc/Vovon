@@ -46,7 +46,7 @@ const Dashboard = () => {
 
       let objectsWithWarningAndMuted = 0;
 
-      objectsWithWarning.forEach(x => retrievedObject.find(y => y.id == x.id_wearable) ? objectsWithWarningAndMuted++ : 0)
+      objectsWithWarning.forEach(x => retrievedObject?.find(y => y.id == x.id_wearable) ? objectsWithWarningAndMuted++ : 0)
 
       if(!isPlaying && !soundOff && objectsWithWarningAndMuted !== objectsWithWarning.length)
         play()

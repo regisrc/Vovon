@@ -37,7 +37,7 @@ const Header = ({user}) => {
     const monocromaticIcons = localStorage.getItem('monocromatic');
     const retrievedObject = JSON.parse(localStorage.getItem('mutedObjects'));
 
-    if (retrievedObject.find(x => x.id === user.id_wearable))
+    if (retrievedObject?.find(x => x.id === user.id_wearable))
       setMute(true)
 
     if (monocromaticIcons === 'true') {
@@ -58,8 +58,8 @@ const Header = ({user}) => {
     let retrievedObject = JSON.parse(localStorage.getItem('mutedObjects'));
 
     if (retrievedObject) {
-      var object = retrievedObject.find(x => x.id === user.id_wearable)
-      var index = retrievedObject.indexOf(object)
+      var object = retrievedObject?.find(x => x.id === user.id_wearable)
+      var index = retrievedObject?.indexOf(object)
       if (index > -1)
         retrievedObject.splice(index, 1);
       else
