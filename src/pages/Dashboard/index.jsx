@@ -15,7 +15,6 @@ import Header from "../../components/Header"
 import Card from "../../components/Card"
 import PatientsSWR from "../../api/patients"
 import sound from '../../assets/sound.mp3';
-import { FormatIndentDecreaseSharp } from '@material-ui/icons';
 
 const messages = [
   { "message": "Claudio revisou TCS (9 min atrás)" },

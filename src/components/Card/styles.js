@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   height: 160px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-  background-color: rgba(77, 182, 172, 1);
+  background-color: ${(props) => props.status};
   cursor: pointer;
   margin: 10px;
 
@@ -21,12 +21,6 @@ export const Container = styled.div`
   @media (max-width: 600px) {
     width: 100%;
   }
-
-  ${(props) =>
-    props.status === 2 &&
-    css`
-      background-color: ${(props) => props.theme.colors.secundaryRed};
-    `}
 `;
 
 export const Section = styled.div`
@@ -76,21 +70,9 @@ export const Status = styled.div`
   min-width: 24px;
   min-height: 24px;
 
-  background-color: ${(props) => props.theme.colors.tertiaryGreen};
+  background-color: ${(props) => props.status};
   border-radius: 50%;
   border: 1px solid black;
-
-  ${(props) =>
-    props.status === 1 &&
-    css`
-      background-color: ${(props) => props.theme.colors.secundaryYellow};
-    `}
-
-  ${(props) =>
-    props.status === 2 &&
-    css`
-      background-color: ${(props) => props.theme.colors.primaryRed};
-    `}
 `;
 
 export const Name = styled.h3`
@@ -110,6 +92,19 @@ export const MuteIcon = styled.img`
 export const SensorIcon = styled.img`
   width: 32px;
   height: 32px;
+
+  ${(props) =>
+    props.problem &&
+    css`
+        animation: blinker 1s linear infinite;
+
+        @keyframes blinker {
+          50% {
+            opacity: 0;
+          }
+        }
+      };
+  `}
 `;
 
 export const SensorValue = styled.h3`
@@ -150,11 +145,14 @@ export const Warning = styled.p`
 
 export const Footer = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
 
   justify-content: space-between;
   padding: 5px 12px;
   font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   ${(props) =>
     props.status === 2 &&

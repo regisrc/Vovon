@@ -1,14 +1,17 @@
-import axios from "axios";
+import axios from "./axiosInstance";
 import useSWR from "swr";
+import { useAuthDataContext } from '../components/Auth'
 
 export const PatientsSWR = () => {
+  const { token } = useAuthDataContext();
+
   const url =
-    "https://1ixzg5dyf1.execute-api.sa-east-1.amazonaws.com/Stage/dashboard";
+    "/dashboard";
 
   const { data, error, mutate } = useSWR(
     url,
     async (url) => {
-      const response = await axios.get(url);
+      const response = await axios.get(url, {headers: {'Authorization': token}});
 
       return response.data;
     },
@@ -18,13 +21,17 @@ export const PatientsSWR = () => {
   return { data, error, mutate };
 };
 
-export const Patients = async () => {
+export const Patients = () => {
+    const { token } = useAuthDataContext();
+
     const url =
-      "https://1ixzg5dyf1.execute-api.sa-east-1.amazonaws.com/Stage/dashboard";
+      "/dashboard";
 
-    const response = await axios(url);
+    const request = async () => {
+      return await axios(url, {headers: {'Authorization': token}});
+    }
 
-    return response.data;
+    return request();
 };
 
 export default PatientsSWR;

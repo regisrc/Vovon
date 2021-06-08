@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2"
 
@@ -15,7 +15,7 @@ import {
   LoginButton,
   PasswordForgot
 } from "./styles";
-import ExecuteLogin from "../../api/login";
+import { useAuthDataContext } from '../../components/Auth'
 
 import loginImage from "../../assets/login-image.svg"
 import logo from "../../assets/logo.svg"
@@ -27,12 +27,14 @@ const Main = () => {
   const [password, setPassword] = useState("");
 
   const history = useHistory();
+  const { onLogin } = useAuthDataContext();
 
-  const buttonClick = async () => {
-    var logged = await ExecuteLogin(login, password)
-    
-    if (logged?.data?.token) {
-      localStorage.setItem('authToken', logged.data.token)
+  const buttonClick = () => {
+    onLogin(login, password).then(loginHandler)
+  }
+
+  const loginHandler = (value) => {
+    if (value) {
       let path = `dashboard`;
       history.push(path);
     } else {

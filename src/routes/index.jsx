@@ -19,9 +19,10 @@ const Loading = (
 
 const Routes = () => (
   <Suspense fallback={Loading}>
+    <Redirect from="/" to="/login" />
     <AuthDataProvider>
       <Switch>
-        <Route exact path="/" component={Main} />
+        <Route exact path="/login" component={Main} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/list" component={List} />
         <PrivateRoute exact path="/config" component={Config} />
@@ -32,14 +33,14 @@ const Routes = () => (
 );
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const { auth } = useAuthDataContext();
+  const { token } = useAuthDataContext();
 
   return (
     <Route
       {...rest} 
-      render={(props) => auth
+      render={(props) => token
         ? <Component {...props} />
-        : <Redirect to={{pathname: '/', state: {from: props.location}}} />}
+        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
 }

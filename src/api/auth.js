@@ -1,8 +1,6 @@
 import axios from "./axiosInstance";
 
-const Auth = async () => {
-  const token = localStorage.getItem("authToken");
-
+const Auth = async (token) => {
   const request = {
     token: token    
   };

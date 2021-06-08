@@ -1,16 +1,18 @@
 import MaterialTable from 'material-table';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {
   Container,
-  Status
+  Status,
+  ReactLoadingContainer 
 } from "./styles";
 import Header from "../../components/Header"
 import { Patients } from "../../api/patients"
+import { StatusEnum } from '../../service/enums/status';
 
 const columns = [
   {
-    title: 'Status',
+    title: 'Nível de Atenção',
     field: 'warningLevel',
     render: rowData => <Status status={rowData.warningLevel}/>
   },
@@ -18,11 +20,19 @@ const columns = [
   { title: 'Batimentos', field: 'bpm' },
   { title: 'Temperatura', field: 'temp' },
   { title: 'Oxigenação', field: 'oxig' },
+  { title: 'Status Dispositivo', field: 'status', render: rowData => StatusEnum[rowData.status].value}
 ];
 
+const Loading = (
+  <div>
+    <ReactLoadingContainer />
+  </div>
+);
+
 const List = () => {
-  const [data, setData] = useState(null);
-  const [isMounted, setIsMounted] = useState(false)
+  const [data, setData] = useState();
+  const [isMounted, setIsMounted] = useState(false);
+  const dashboardValue = useRef(Patients())
 
   useEffect(() => {
     setIsMounted(true)
@@ -32,19 +42,35 @@ const List = () => {
   useEffect(() => {
     if (!isMounted) return
 
-    const fetchData = async () => {
-      setData(await Patients())
-    }
-    
-    fetchData();
+    dashboardValue.current.then(value => setData(value.data))
+
   }, [isMounted]);
 
   return (
     <Container>
       <Header page={'list'}/>
+      {!data && Loading}
       {data &&
        <div style={{ maxWidth: '100%', padding: '16px' }}>
-        <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de pacientes' />
+        <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de pacientes' localization={{
+        body: {
+          emptyDataSourceMessage: 'Nenhum registro para exibir'
+        },
+        toolbar: {
+          searchTooltip: 'Pesquisar',
+          searchPlaceholder: 'Pesquisar',
+          exportTitle: 'Exportar',
+          exportName: 'Exportar'
+        },
+        pagination: {
+          labelRowsSelect: 'linhas',
+          labelDisplayedRows: '{count} de {from}-{to}',
+          firstTooltip: 'Primeira página',
+          previousTooltip: 'Página anterior',
+          nextTooltip: 'Próxima página',
+          lastTooltip: 'Última página'
+        }
+      }} />
       </div> }
     </Container>)
 }

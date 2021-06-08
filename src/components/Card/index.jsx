@@ -16,6 +16,8 @@ import {
   DeviceStatus,
   Warning
 } from "./styles";
+import { StatusEnum } from '../../service/enums/status';
+import { colors } from '../../styles/colors';
 
 import volumeOn from "../../assets/volume_on.svg"
 import volumeOff from "../../assets/volume_off.svg"
@@ -72,34 +74,48 @@ const Header = ({user}) => {
     }
   }
 
+  const setStatusColor = (warningLevel, status) => {
+    if (warningLevel == 2)
+      return colors.primaryRed;
+
+    return StatusEnum[status].ballColor;
+  }
+
+  const setCardColor = (warningLevel, status) => {
+    if (warningLevel == 2)
+      return colors.secundaryRed;
+
+    return StatusEnum[status].color;
+  }
+
   return (
-    <Container onClick={() => history.push(`medicalRecord/${user.id_wearable}`)} status={user.warningLevel}>
+    <Container onClick={() => history.push(`medicalRecord/${user.id_wearable}`)} status={setCardColor(user.warningLevel, user.status)}>
       <Section>
         <NameStatusArea>  
-          <Status status={user.warningLevel} />
+          <Status status={setStatusColor(user.warningLevel, user.status)} />
           <Name>{user.name}</Name> 
         </NameStatusArea>
         <MuteIcon onClick={handleMuteClick} src={mute ? volumeOff : volumeOn}/>
       </Section>
       <ColumnContainer>
       <Column>
-        <SensorIcon src={heartIcon} />
+        <SensorIcon problem={user.status == 4} src={heartIcon} />
         <SensorValue>{user.bpm}</SensorValue>
       </Column>
       <Column>
-        <SensorIcon src={temperatureIcon} />
+        <SensorIcon problem={user.status == 3} src={temperatureIcon} />
         <SensorValue>{user.temp}</SensorValue>
       </Column>
       <Column>
-        <SensorIcon src={oxygenIcon} />
+        <SensorIcon problem={user.status == 4} src={oxygenIcon} />
         <SensorValue>{user.oxig}</SensorValue>
       </Column>
       </ColumnContainer>
       <Footer>
+        <DeviceStatus status={user.warningLevel}>{StatusEnum[user.status].value}</DeviceStatus>
         {user.warningLevel == 2 &&
           <Warning status={user.warningLevel}>Perigo!</Warning>
         }
-        <DeviceStatus status={user.warningLevel}>Conectado</DeviceStatus>
       </Footer>
     </Container>)
 }
