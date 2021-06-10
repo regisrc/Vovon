@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import Swal from "sweetalert2";
 
 import {
   Container,
@@ -9,14 +10,16 @@ import {
   NameStatusArea,
   Status,
   Name,
-  MuteIcon,
+  Icon,
   SensorIcon,
   SensorValue,
   Footer,
   DeviceStatus,
-  Warning
+  Warning,
+  DeviceStatusContainer,
+  InfoIcon
 } from "./styles";
-import { StatusEnum } from '../../service/enums/status';
+import { StatusEnumBR } from '../../service/enums/status';
 import { colors } from '../../styles/colors';
 
 import volumeOn from "../../assets/volume_on.svg"
@@ -27,6 +30,7 @@ import oximeter from "../../assets/oximeter.svg"
 import heartMono from "../../assets/heart-mono.svg"
 import thermometerMono from "../../assets/thermometer-mono.svg"
 import oximeterMono from "../../assets/oximeter-mono.svg"
+import infoStatus from "../../assets/status_info.svg"
 
 const Header = ({user}) => {
   const history = useHistory();
@@ -74,18 +78,23 @@ const Header = ({user}) => {
     }
   }
 
+  function handleEventType(e) {
+    e.stopPropagation();
+    Swal.fire(StatusEnumBR[user.status].value);
+  }
+
   const setStatusColor = (warningLevel, status) => {
     if (warningLevel == 2)
       return colors.primaryRed;
 
-    return StatusEnum[status].ballColor;
+    return StatusEnumBR[status].ballColor;
   }
 
   const setCardColor = (warningLevel, status) => {
     if (warningLevel == 2)
       return colors.secundaryRed;
 
-    return StatusEnum[status].color;
+    return StatusEnumBR[status].color;
   }
 
   return (
@@ -95,24 +104,29 @@ const Header = ({user}) => {
           <Status status={setStatusColor(user.warningLevel, user.status)} />
           <Name>{user.name}</Name> 
         </NameStatusArea>
-        <MuteIcon onClick={handleMuteClick} src={mute ? volumeOff : volumeOn}/>
+        <Icon onClick={handleMuteClick} src={mute ? volumeOff : volumeOn}/>
       </Section>
       <ColumnContainer>
       <Column>
-        <SensorIcon problem={user.status == 4} src={heartIcon} />
+        <SensorIcon problem={user.status == 4 || user.status == 2} src={heartIcon} />
         <SensorValue>{user.bpm}</SensorValue>
       </Column>
       <Column>
-        <SensorIcon problem={user.status == 3} src={temperatureIcon} />
+        <SensorIcon problem={user.status == 3 || user.status == 2} src={temperatureIcon} />
         <SensorValue>{user.temp}</SensorValue>
       </Column>
       <Column>
-        <SensorIcon problem={user.status == 4} src={oxygenIcon} />
+        <SensorIcon problem={user.status == 4 || user.status == 2} src={oxygenIcon} />
         <SensorValue>{user.oxig}</SensorValue>
       </Column>
       </ColumnContainer>
       <Footer>
-        <DeviceStatus status={user.warningLevel}>{StatusEnum[user.status].value}</DeviceStatus>
+        <DeviceStatusContainer onClick={handleEventType}>
+          <DeviceStatus status={user.warningLevel}>
+            {StatusEnumBR[user.status].value.split(' ')[0]}
+          </DeviceStatus>
+          <InfoIcon src={infoStatus} />
+        </DeviceStatusContainer>
         {user.warningLevel == 2 &&
           <Warning status={user.warningLevel}>Perigo!</Warning>
         }

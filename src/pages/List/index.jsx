@@ -8,7 +8,7 @@ import {
 } from "./styles";
 import Header from "../../components/Header"
 import { Patients } from "../../api/patients"
-import { StatusEnum } from '../../service/enums/status';
+import { StatusEnumBR } from '../../service/enums/status';
 
 const columns = [
   {
@@ -20,7 +20,7 @@ const columns = [
   { title: 'Batimentos', field: 'bpm' },
   { title: 'Temperatura', field: 'temp' },
   { title: 'Oxigenação', field: 'oxig' },
-  { title: 'Status Dispositivo', field: 'status', render: rowData => StatusEnum[rowData.status].value}
+  { title: 'Status Dispositivo', field: 'status', render: rowData => StatusEnumBR[rowData.status].value}
 ];
 
 const Loading = (

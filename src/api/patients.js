@@ -25,13 +25,26 @@ export const Patients = () => {
     const { token } = useAuthDataContext();
 
     const url =
-      "/dashboard";
+      `/dashboard`;
 
     const request = async () => {
       return await axios(url, {headers: {'Authorization': token}});
     }
 
     return request();
+};
+
+export const Patient = (id) => {
+  const { token } = useAuthDataContext();
+
+  const url =
+    `/updates/${id}/prontuario`;
+
+  const request = async () => {
+    return await axios(url, {headers: {'Authorization': token}});
+  }
+
+  return request();
 };
 
 export default PatientsSWR;

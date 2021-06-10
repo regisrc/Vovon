@@ -79,7 +79,7 @@ export const Name = styled.h3`
   font-weight: normal;
 `;
 
-export const MuteIcon = styled.img`
+export const Icon = styled.img`
   width: 24px;
   height: 24px;
   opacity: 80%;
@@ -114,11 +114,6 @@ export const SensorValue = styled.h3`
 
 export const DeviceStatus = styled.p`
   color: white;
-  opacity: 70%;
-
-  :hover {
-    opacity: 100%;
-  }
 `;
 
 export const Warning = styled.p`
@@ -167,4 +162,26 @@ export const Footer = styled.div`
         }
       };
   `}
+`;
+
+export const DeviceStatusContainer = styled.div`
+  display: flex;
+  flex-direction: row; 
+
+  justify-content: center;
+  align-items: center; 
+  opacity: 70%;
+
+  :hover {
+    opacity: 100%;
+  }
+
+  p + img {
+    margin: 0px 3px;
+  }
+`;
+
+export const InfoIcon = styled.img`
+  width: 16px;
+  height: 16px;
 `;

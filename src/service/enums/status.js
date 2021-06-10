@@ -1,6 +1,6 @@
 import { colors } from "../../styles/colors"
 
-export const StatusEnum = {
+export const StatusEnumBR = {
     1: { value: "Conectado", ballColor: colors.tertiaryGreen, color: colors.secundaryGreen  }, 
     2: { value: "Conectado - Fora do corpo", ballColor: colors.primaryRed, color: colors.secundaryRed  },
     3: { value: "Conectado - Problema no sensor de temperatura", ballColor: colors.primaryRed, color: colors.secundaryGreen  },
