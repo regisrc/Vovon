@@ -1,22 +1,11 @@
-import axios from "axios";
+import axios from "./axiosInstance";
 
 const ExecuteLogin = async (login, password) => {
   const request = {
     username: login,
     password: password,
   };
-  try {
-    const response = await axios.post(
-      `https://1ixzg5dyf1.execute-api.sa-east-1.amazonaws.com/Stage/login`,
-      request
-    );
-
-    return response;
-  } catch (error) {
-    console.error(error);
-
-    return false;
-  }
+  return await axios.post("/login", request);
 };
 
 export default ExecuteLogin;

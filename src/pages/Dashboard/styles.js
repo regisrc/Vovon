@@ -29,6 +29,7 @@ export const DashboardContainer = styled.div`
 
   @media (max-width: 900px) {
     width: 100vw;
+    position: absolute;
   }
 `;
 

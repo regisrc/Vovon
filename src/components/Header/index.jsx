@@ -1,70 +1,75 @@
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useState, useEffect } from "react"
+import Clock from 'react-live-clock';
+import 'moment/locale/pt';
 
 import {
   Container,
   MenuBar,
-  UserArea,
-  UserProfile,
-  UserEmailAndNameContainer,
-  UserName,
-  UserEmail,
   ILPITitle,
   InfosContainer,
   GridDisplay,
   ButtonIcon,
   DateArea,
   Hour,
-  DateTime
+  DateTime,
+  ConfigArea
 } from "./styles";
 
 import dashboard from "../../assets/dashboard.svg"
 import list from "../../assets/list.svg"
+import config from "../../assets/gear.svg"
 
-import { date, hour } from "../../service/utils/date-format"
-
-const Header = () => {
+const Header = ({ page }) => {
   const Title = "Casa de Repouso Nova Esperança"
   const Dash = "dashboard";
-  const List = "list"
-  const [stateHour, setStateHour] = useState(hour);
-  const [stateDate, setStateDate] = useState(date);
-  const [changeHour, setChangeHour] = useState(true);
+  const List = "list";
+  const Config = "config";
+  const [isMounted, setIsMounted] = useState(false);
+  const [exitPage, setExitPage] = useState(false);
+  const [route, setRoute] = useState(null);
 
-  const history = useHistory();
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
 
-  const sleep = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  const pushOrGoBack = (route) => {
+    setRoute(`/${route}`)
+    setExitPage(true)
   }
 
   useEffect(() => {
-    async function fetchData() {
-      await sleep(5000);
-      
-      setStateHour(hour)
-      setStateDate(date)
-      setChangeHour(true)
-      console.log("oi")
-    }
-
-    fetchData()
-    setChangeHour(false)
-  }, [setChangeHour]);
-
+    if (!isMounted) return
+  }, []);
+  
   return (
     <Container>
+      {exitPage && <Redirect to={route} />}
       <MenuBar>
         <InfosContainer>
           <DateArea>
-            <Hour>{stateHour}</Hour>
-            <DateTime>{stateDate}</DateTime>
+            <Hour><Clock
+                format={'HH:mm'}
+                ticking={true}
+                timezone={'America/Sao_Paulo'} /></Hour>
+            <DateTime>
+              <Clock
+                format={'ddd, MMMM Mo, YYYY'}
+                ticking={true}
+                timezone={'America/Sao_Paulo'} 
+                locale='pt'/>
+            </DateTime>
           </DateArea>
-          <GridDisplay onClick={() => history.push(Dash)}><ButtonIcon src={dashboard}/></GridDisplay>
-          <GridDisplay onClick={() => history.push(List)}><ButtonIcon src={list} /></GridDisplay>
+          <GridDisplay view={page === 'dash'} onClick={() => pushOrGoBack(Dash)}><ButtonIcon src={dashboard}/></GridDisplay>
+          <GridDisplay view={page === 'list'} onClick={() => pushOrGoBack(List)}><ButtonIcon src={list} /></GridDisplay>
         </InfosContainer>
         <ILPITitle>
           {Title}
         </ILPITitle>
+        <ConfigArea>
+          <GridDisplay view={page === 'config'} onClick={() => pushOrGoBack(Config)}><ButtonIcon src={config} /></GridDisplay>
+        </ConfigArea>
       </MenuBar>
     </Container>)
 }

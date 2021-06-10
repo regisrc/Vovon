@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2"
 import useSound from 'use-sound';
 
@@ -13,7 +13,7 @@ import {
 } from "./styles";
 import Header from "../../components/Header"
 import Card from "../../components/Card"
-import Patients from "../../api/patients"
+import PatientsSWR from "../../api/patients"
 import sound from '../../assets/sound.mp3';
 
 const messages = [
@@ -23,34 +23,64 @@ const messages = [
 ]
 
 const Dashboard = () => {
-  const { data } = Patients();
-  const [play] = useSound(sound);
+  const { data } = PatientsSWR();
+  const [play, { stop, isPlaying }] = useSound(sound);
+  const [isMounted, setIsMounted] = useState(false)
+  const [soundOff] = useState(localStorage.getItem('sound') === 'true');
+  const [alertOff] = useState(localStorage.getItem('alert') === 'true');
 
   useEffect(() => {
-    if (data?.find(x => x.warningLevel == 2)) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Existem pacientes em perigo!',
-        showConfirmButton: true
-      })
+    setIsMounted(true)
+
+    return () => setIsMounted(false)
+  }, [])
+  
+  useEffect(() => {
+    if (!isMounted) return
     
-      for (let index = 0; index < 5; index++) {
+    const objectsWithWarning = data?.filter(x => x.warningLevel == 2);
+
+    if (objectsWithWarning) {
+      let retrievedObject = JSON.parse(localStorage.getItem('mutedObjects'));
+
+      let objectsWithWarningAndMuted = 0;
+
+      objectsWithWarning.forEach(x => retrievedObject?.find(y => y.id == x.id_wearable) ? objectsWithWarningAndMuted++ : 0)
+
+      if(!isPlaying && !soundOff && objectsWithWarningAndMuted !== objectsWithWarning.length)
         play()
-      
-        new Promise(resolve => setTimeout(resolve, 2000));
+
+      if (!alertOff) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 10000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('click', Swal.close)
+          }
+        })
+
+        Toast.fire({
+          icon: 'error',
+          title: 'Existem pacientes em perigo!'
+        })
       }
+    } else {
+      if (isPlaying && !soundOff)
+        stop()
     }
   }, [data])
 
   return (
     <Container>
-      <Header />
+      <Header page={'dash'}/>
       <ComponentsContainer>
         <DashboardContainer>
           {data &&
             data.map((User, index) => (
-                <Card key={index} user={User} />
+              <Card key={index} user={User} />
             ))
           }
         </DashboardContainer>
