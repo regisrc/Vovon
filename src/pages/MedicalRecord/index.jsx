@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import Swal from "sweetalert2"
+import { useParams, useHistory } from 'react-router-dom';
 
 import {
   Container,
@@ -22,16 +21,20 @@ import {
   SensorValue,
 } from "./styles";
 import Header from "../../components/Header"
-import { Patient } from "../../api/patients"
+import { Loading } from "../../components/LoadingComponent";
+import { Patient, Sensors } from "../../api/patients"
 
 import increase from "../../assets/increase.svg"
 import decrease from "../../assets/decrease.svg"
 
 const MedicalRecord = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   const [data, setData] = useState();
+  const [sensors, setSensors] = useState();
   const medicalRecordValue = useRef(Patient(id)) 
+  const sensorsValue = useRef(Sensors(id)) 
   const [isMounted, setIsMounted] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setIsMounted(true)
@@ -41,44 +44,25 @@ const MedicalRecord = () => {
   useEffect(() => {
     if (!isMounted) return
 
-    medicalRecordValue.current.then(setData)
-
+    medicalRecordValue.current.then(value => setData(value.data))
+    sensorsValue.current.then(value => setSensors(value.data))
   }, [isMounted]);
-
-  const HandleForm = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: 'Multiple inputs',
-      html:
-        '<input id="swal-input1" class="swal2-input">' +
-        '<input id="swal-input2" class="swal2-input">',
-      focusConfirm: false,
-      preConfirm: () => {
-        return [
-          document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').value
-        ]
-      }
-    })
-    
-    if (formValues) {
-      Swal.fire(JSON.stringify(formValues))
-    }
-  }
 
   return (
     <Container>
       <Header page={'medicalRecord'}/>
+      {(id && data)  && 
       <CardContainer>
         <Photo src="https://imagevars.gulfnews.com/2019/11/01/Grandpa-Kitchen_16e26379544_large.jpg"/>
         <InfoContainer>
-          <Name>José Alfredo Mansini</Name>
-          <Contact>Contato de emergência: (47) 99213-8899</Contact>
+          <Name>{data.nome}</Name>
+          <Contact>{data.nrContato}</Contact>
           <ObsContainer>
             <Obs>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            {data.obsGerais}
             </Obs>
           </ObsContainer>
-          <Button onClick={HandleForm}>Cadastrar métricas</Button>
+          <Button onClick={() => history.push(`/manualInput/${id}`)}>Aferição manual</Button>
         </InfoContainer>  
         <SensorComponentContainer>
         <SensorContainer>
@@ -110,9 +94,10 @@ const MedicalRecord = () => {
           </SensorValues>
         </Sensor>     
         </SensorContainer>
-        <Button>Recarregar</Button>
         </SensorComponentContainer>    
       </CardContainer>
+      }
+      {((!id || !data) && isMounted) && Loading}
     </Container>)
 }
 

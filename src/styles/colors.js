@@ -8,7 +8,7 @@ export const colors = {
   primaryYellow: "#fbd560",
   secundaryYellow: "#FBFB11",
   primaryPurple: "#503e9d",
-  secundaryGray: "#ababab",
+  secundaryGray: "#c1bcbc",
   tertiaryGray: "#3a4750",
   quaternaryGray: "#5d656c",
   quintenaryGray: "#AEBCBB",

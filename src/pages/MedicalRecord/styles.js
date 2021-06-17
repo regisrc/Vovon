@@ -79,7 +79,6 @@ export const ObsContainer = styled.div`
  display: flex; 
  height: 100%;
 
- padding: 2px;
  opacity: 100%;
 `;
 

@@ -3,10 +3,10 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import {
   Container,
-  Status,
-  ReactLoadingContainer 
+  Status
 } from "./styles";
 import Header from "../../components/Header"
+import { Loading } from "../../components/LoadingComponent";
 import { Patients } from "../../api/patients"
 import { StatusEnumBR } from '../../service/enums/status';
 
@@ -22,12 +22,6 @@ const columns = [
   { title: 'Oxigenação', field: 'oxig' },
   { title: 'Status Dispositivo', field: 'status', render: rowData => StatusEnumBR[rowData.status].value}
 ];
-
-const Loading = (
-  <div>
-    <ReactLoadingContainer />
-  </div>
-);
 
 const List = () => {
   const [data, setData] = useState();

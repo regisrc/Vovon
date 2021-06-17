@@ -38,13 +38,40 @@ export const Patient = (id) => {
   const { token } = useAuthDataContext();
 
   const url =
-    `/updates/${id}/prontuario`;
+    `prontuario`;
 
-  const request = async () => {
-    return await axios(url, {headers: {'Authorization': token}});
+  const headers =
+  {
+    headers: {
+      'Authorization': token
+    }
+  };
+
+  const request = async (id, headers) => {
+    return await axios.post(url, {id : id}, headers);
   }
 
-  return request();
+  return request(id, headers);
+};
+
+export const Sensors = (id) => {
+  const { token } = useAuthDataContext();
+
+  const url =
+    `sensores`;
+
+  const headers =
+  {
+    headers: {
+      'Authorization': token
+    }
+  };
+
+  const request = async (id, headers) => {
+    return await axios.post(url, {id : id}, headers);
+  }
+
+  return request(id, headers);
 };
 
 export default PatientsSWR;
