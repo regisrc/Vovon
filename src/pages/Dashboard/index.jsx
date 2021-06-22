@@ -39,8 +39,9 @@ const Dashboard = () => {
     if (!isMounted) return
     
     const objectsWithWarning = data?.filter(x => x.warningLevel == 2);
+    console.log(objectsWithWarning)
 
-    if (objectsWithWarning) {
+    if (objectsWithWarning.length > 0 && objectsWithWarning) {
       let retrievedObject = JSON.parse(localStorage.getItem('mutedObjects'));
 
       let objectsWithWarningAndMuted = 0;

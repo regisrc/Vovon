@@ -12,6 +12,9 @@ import { Sensors, Operation, AlertLevel } from "../../service/enums/alerts.js"
 const columns = [
   { title: 'Descrição', field: 'descricao' },
   { title: 'Nível de Alerta', field: 'alertLevel' },
+  { title: 'Tipo operação', field: 'tipoOp' },
+  { title: 'Valor', field: 'valor' },
+  { title: 'Tipo sensor', field: 'tipoSensor' },
   { title: 'Ativo', field: 'ativo' },
 ];
 
@@ -41,7 +44,10 @@ const VerifyAlerts = () => {
       data[index].regras.forEach(single => dataObject.push({
         descricao: descricao,
         alertLevel: alertLevel,
-        ativo: single.estaAtivo
+        ativo: single.estaAtivo ? "Sim" : "Não",
+        tipoOp: Operation[single.tipoOperacao],
+        valor: single.valorReferencia,
+        tipoSensor: Sensors[single.tipoSensor]
       }))
     }
 
