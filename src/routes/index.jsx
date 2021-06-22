@@ -11,6 +11,7 @@ const List = lazy(() => import('../pages/List'));
 const Config = lazy(() => import('../pages/Config'));
 const MedicalRecord = lazy(() => import('../pages/MedicalRecord'));
 const ManualInput = lazy(() => import('../pages/ManualInput'));
+const VerifyAlerts = lazy(() => import('../pages/VerifyAlerts'));
 
 const Loading = (
   <div>
@@ -28,7 +29,8 @@ const Routes = () => (
         <PrivateRoute exact path="/list" component={List} />
         <PrivateRoute exact path="/config" component={Config} />
         <PrivateRoute path="/medicalRecord/:id" component={MedicalRecord} />
-        <PrivateRoute path="/manualInput/:id" component={ManualInput} />
+        <PrivateRoute path="/manualInput" component={ManualInput} />
+        <PrivateRoute path="/verifyAlerts" component={VerifyAlerts} />
       </Switch>
     </AuthDataProvider>
   </Suspense>

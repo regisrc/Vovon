@@ -15,6 +15,7 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
 
   width: 90vw;
   min-height: 300px;
@@ -32,24 +33,24 @@ export const CardContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 export const Photo = styled.img`
-   width: 300px;
-   height: 256px;
+  width: 300px;
+  height: 256px;
 
-   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-   border-radius: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
 
-   @media (max-width: 900px) {
+  @media (max-width: 900px) {
     margin-bottom: 5px;
-   }
+  }
 
-   @media (max-width: 400px) {
+  @media (max-width: 400px) {
     width: 250px;
     height: 206px;
-   }
-`
+  }
+`;
 
 export const InfoContainer = styled.div`
   display: flex;
@@ -65,7 +66,7 @@ export const InfoContainer = styled.div`
 
 export const Name = styled.h1`
   color: white;
-`
+`;
 
 export const Contact = styled.h4`
   color: white;
@@ -73,13 +74,13 @@ export const Contact = styled.h4`
   @media (max-width: 900px) {
     margin: 10px 0px;
   }
-`
+`;
 
 export const ObsContainer = styled.div`
- display: flex; 
- height: 100%;
+  display: flex;
+  height: 100%;
 
- opacity: 100%;
+  opacity: 100%;
 `;
 
 export const Obs = styled.p`
@@ -130,7 +131,7 @@ export const SensorContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 export const Sensor = styled.div`
   display: flex;
@@ -145,7 +146,7 @@ export const Sensor = styled.div`
   img + div {
     margin: 0px 20px;
   }
-`
+`;
 
 export const SensorHeader = styled.div`
   display: flex;
@@ -168,7 +169,7 @@ export const SensorValues = styled.div`
   h2 + img {
     margin: 0px 10px;
   }
-`
+`;
 
 export const Icon = styled.img`
   width: 56px;

@@ -25,6 +25,7 @@ import { Loading } from "../../components/LoadingComponent";
 import { Patient, Sensors } from "../../api/patients"
 
 import increase from "../../assets/increase.svg"
+import equal from "../../assets/equal.svg"
 import decrease from "../../assets/decrease.svg"
 
 const MedicalRecord = () => {
@@ -35,6 +36,15 @@ const MedicalRecord = () => {
   const sensorsValue = useRef(Sensors(id)) 
   const [isMounted, setIsMounted] = useState(false);
   const history = useHistory();
+
+  const returnImage = (value) => {
+    if (value === -1)
+      return decrease
+    else if (value === 1)
+      return increase
+    else
+      return equal
+  }
 
   useEffect(() => {
     setIsMounted(true)
@@ -53,7 +63,7 @@ const MedicalRecord = () => {
       <Header page={'medicalRecord'}/>
       {(id && data)  && 
       <CardContainer>
-        <Photo src="https://imagevars.gulfnews.com/2019/11/01/Grandpa-Kitchen_16e26379544_large.jpg"/>
+        <Photo src={data.foto}/>
         <InfoContainer>
           <Name>{data.nome}</Name>
           <Contact>{data.nrContato}</Contact>
@@ -62,6 +72,8 @@ const MedicalRecord = () => {
             {data.obsGerais}
             </Obs>
           </ObsContainer>
+          <Button onClick={() => history.push(`/manualInput`)}>Cadastrar Alertas</Button>
+          <Button onClick={() => history.push(`/verifyAlerts`)}>Ver Alertas</Button>
           <Button onClick={() => history.push(`/manualInput/${id}`)}>Aferição manual</Button>
         </InfoContainer>  
         <SensorComponentContainer>
@@ -71,8 +83,8 @@ const MedicalRecord = () => {
             <SensorTitle>Temperatura</SensorTitle> 
           </SensorHeader>
           <SensorValues>
-            <SensorValue>30,2</SensorValue> 
-            <Icon src={increase}/>   
+            <SensorValue>{sensors?.sensores?.temp.valorAtual}</SensorValue> 
+            <Icon src={returnImage(sensors?.sensores?.temp.variacao)}/>   
           </SensorValues>
         </Sensor>  
         <Sensor>
@@ -80,8 +92,8 @@ const MedicalRecord = () => {
             <SensorTitle>Batimentos</SensorTitle> 
           </SensorHeader>
           <SensorValues>
-            <SensorValue>90</SensorValue> 
-            <Icon src={decrease}/>   
+            <SensorValue>{sensors?.sensores?.bpm.valorAtual}</SensorValue> 
+            <Icon src={returnImage(sensors?.sensores?.bpm.variacao)}/>   
           </SensorValues>
         </Sensor> 
         <Sensor>
@@ -89,8 +101,8 @@ const MedicalRecord = () => {
             <SensorTitle>Oxigenação</SensorTitle> 
           </SensorHeader>
           <SensorValues>
-            <SensorValue>100</SensorValue> 
-            <Icon src={increase}/>   
+            <SensorValue>{sensors?.sensores?.oxig.valorAtual}</SensorValue> 
+            <Icon src={returnImage(sensors?.sensores?.oxig.variacao)}/>   
           </SensorValues>
         </Sensor>     
         </SensorContainer>

@@ -48,7 +48,7 @@ const Header = ({ page }) => {
                 timezone={'America/Sao_Paulo'} /></Hour>
             <DateTime>
               <Clock
-                format={'ddd, MMMM Mo, YYYY'}
+                format={`ddd, DD MMMM, YYYY`}
                 ticking={true}
                 timezone={'America/Sao_Paulo'} 
                 locale='pt'/>
