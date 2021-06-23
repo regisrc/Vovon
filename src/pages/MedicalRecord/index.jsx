@@ -72,8 +72,6 @@ const MedicalRecord = () => {
             {data.obsGerais}
             </Obs>
           </ObsContainer>
-          <Button onClick={() => history.push(`/manualInput`)}>Cadastrar Alertas</Button>
-          <Button onClick={() => history.push(`/verifyAlerts`)}>Ver Alertas</Button>
           <Button onClick={() => history.push(`/manualInput/${id}`)}>Aferição manual</Button>
         </InfoContainer>  
         <SensorComponentContainer>

@@ -56,11 +56,11 @@ const VerifyAlerts = () => {
 
   return (
     <Container>
-      <Header page={'list'}/>
+      <Header />
       {!data && Loading}
       {data &&
        <div style={{ maxWidth: '100%', padding: '16px' }}>
-        <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de pacientes' localization={{
+        <MaterialTable options={{ exportButton: true }} columns={columns} data={data} title='Lista de alertas' localization={{
         body: {
           emptyDataSourceMessage: 'Nenhum registro para exibir'
         },

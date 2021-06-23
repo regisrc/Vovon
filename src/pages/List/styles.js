@@ -29,3 +29,33 @@ export const Status = styled.div`
       background-color: ${(props) => props.theme.colors.primaryRed};
     `}
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`
+
+export const Button = styled.button`
+  max-width: 300px;
+  min-width: 200px;
+  height: 35px;
+  min-height: 35px;
+  margin: 10px 0px;
+  padding: 4px;
+  margin-left: 5px;
+
+  border-radius: 4px;
+  background-color: ${(props) => props.theme.colors.tertiaryGray};
+  color: ${(props) => props.theme.colors.primaryGray};
+  cursor: pointer;
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.quaternaryGray};
+  }
+`;

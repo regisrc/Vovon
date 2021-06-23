@@ -70,8 +70,7 @@ export const Sensors = (id) => {
   return request(id, headers);
 };
 
-export const Alerts = (data) => {
-  const { token } = useAuthDataContext();
+export const Alerts = (data, token) => {
 
   const url = `alertas`;
 
@@ -116,6 +115,30 @@ export const GetAlerts = () => {
   };
 
   return request(headers);
+};
+
+export const Admeasurement = (data, token) => {
+
+  const url = `afericao`;
+
+  const body = {
+    id: data.id,
+    temp: data.temp,
+    oxig: data.oxig,
+    bpm:  data.bpm,
+  };
+
+  const headers = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const request = async (body, headers) => {
+    return await axios.post(url, body, headers);
+  };
+
+  return request(body, headers);
 };
 
 export default PatientsSWR;

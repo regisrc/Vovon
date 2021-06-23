@@ -1,9 +1,12 @@
 import MaterialTable from 'material-table';
 import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   Container,
-  Status
+  Status,
+  ButtonContainer,
+  Button
 } from "./styles";
 import Header from "../../components/Header"
 import { Loading } from "../../components/LoadingComponent";
@@ -27,6 +30,7 @@ const List = () => {
   const [data, setData] = useState();
   const [isMounted, setIsMounted] = useState(false);
   const dashboardValue = useRef(Patients())
+  const history = useHistory();
 
   useEffect(() => {
     setIsMounted(true)
@@ -43,6 +47,10 @@ const List = () => {
   return (
     <Container>
       <Header page={'list'}/>
+      <ButtonContainer>
+      <Button onClick={() => history.push(`/addAlerts`)}>Cadastrar Alertas</Button>
+      <Button onClick={() => history.push(`/verifyAlerts`)}>Ver Alertas</Button>
+      </ButtonContainer>
       {!data && Loading}
       {data &&
        <div style={{ maxWidth: '100%', padding: '16px' }}>
