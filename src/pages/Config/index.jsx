@@ -9,8 +9,10 @@ import {
   Button
 } from "./styles";
 import Header from "../../components/Header"
+import { useHistory } from "react-router-dom";
 
 const Config = () => {
+  const history = useHistory();
   const [iconsEnabled, setIconsEnabled] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [alertsEnabled, setAlertsEnabled] = useState(false);
@@ -63,6 +65,7 @@ const Config = () => {
         <IconLabel htmlFor="checkbox3">Desabilitar alerta</IconLabel>
       </CheckBoxContainer>
       <Button onClick={() => Save()}>Salvar</Button>
+      <Button onClick={() => history.push("/login")}>Deslogar</Button>
     </Container>)
 }
 

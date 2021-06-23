@@ -74,7 +74,7 @@ const Header = ({user}) => {
       localStorage.setItem('mutedObjects', JSON.stringify(retrievedObject));
     }
     else {
-      localStorage.setItem('mutedObjects', JSON.stringify(([{ 'id': user.id_wearable }])));
+      localStorage.setItem('mutedObjects', JSON.stringify(([{ 'id': user.id }])));
     }
   }
 

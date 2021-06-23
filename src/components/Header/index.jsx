@@ -1,7 +1,7 @@
-import { Redirect } from "react-router-dom";
 import { useState, useEffect } from "react"
 import Clock from 'react-live-clock';
 import 'moment/locale/pt';
+import { useHistory } from "react-router-dom";
 
 import {
   Container,
@@ -26,18 +26,12 @@ const Header = ({ page }) => {
   const List = "list";
   const Config = "config";
   const [isMounted, setIsMounted] = useState(false);
-  const [exitPage, setExitPage] = useState(false);
-  const [route, setRoute] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  const pushOrGoBack = (route) => {
-    setRoute(`/${route}`)
-    setExitPage(true)
-  }
 
   useEffect(() => {
     if (!isMounted) return
@@ -45,7 +39,6 @@ const Header = ({ page }) => {
   
   return (
     <Container>
-      {exitPage && <Redirect to={route} />}
       <MenuBar>
         <InfosContainer>
           <DateArea>
@@ -55,20 +48,20 @@ const Header = ({ page }) => {
                 timezone={'America/Sao_Paulo'} /></Hour>
             <DateTime>
               <Clock
-                format={'ddd, MMMM Mo, YYYY'}
+                format={`ddd, DD MMMM, YYYY`}
                 ticking={true}
                 timezone={'America/Sao_Paulo'} 
                 locale='pt'/>
             </DateTime>
           </DateArea>
-          <GridDisplay view={page === 'dash'} onClick={() => pushOrGoBack(Dash)}><ButtonIcon src={dashboard}/></GridDisplay>
-          <GridDisplay view={page === 'list'} onClick={() => pushOrGoBack(List)}><ButtonIcon src={list} /></GridDisplay>
+          <GridDisplay view={page === 'dash'} onClick={() => history.push(`/${Dash}`)}><ButtonIcon src={dashboard}/></GridDisplay>
+          <GridDisplay view={page === 'list'} onClick={() => history.push(`/${List}`)}><ButtonIcon src={list} /></GridDisplay>
         </InfosContainer>
         <ILPITitle>
           {Title}
         </ILPITitle>
         <ConfigArea>
-          <GridDisplay view={page === 'config'} onClick={() => pushOrGoBack(Config)}><ButtonIcon src={config} /></GridDisplay>
+          <GridDisplay view={page === 'config'} onClick={() => history.push(`/${Config}`)}><ButtonIcon src={config} /></GridDisplay>
         </ConfigArea>
       </MenuBar>
     </Container>)

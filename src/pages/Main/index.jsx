@@ -33,6 +33,24 @@ const Main = () => {
     onLogin(login, password).then(loginHandler)
   }
 
+  const recoverPassword = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 10000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('click', Swal.close)
+      }
+    })
+
+    Toast.fire({
+      icon: 'warning',
+      title: 'Contate o administrador do sistema!'
+    })
+  }
+
   const loginHandler = (value) => {
     if (value) {
       let path = `dashboard`;
@@ -75,7 +93,7 @@ const Main = () => {
         <LoginButton onClick={buttonClick}>
           Entrar  
         </LoginButton>
-        <PasswordForgot onClick={() => alert("Recuperar Senha!")}>Esqueceu sua senha?</PasswordForgot>
+        <PasswordForgot onClick={recoverPassword}>Esqueceu sua senha?</PasswordForgot>
       </LoginContainer>
     </Container>);
 };

@@ -70,7 +70,7 @@ export const Notes = styled.div`
   justify-content: center;
 
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.1);
   margin: 10px 0px;
   text-align: center;
 

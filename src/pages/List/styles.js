@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import ReactLoading from "react-loading";
 
 export const Container = styled.div`
   display: flex;
@@ -31,14 +30,32 @@ export const Status = styled.div`
     `}
 `;
 
-export const ReactLoadingContainer = styled(ReactLoading).attrs((props) => ({
-  color: props.theme.colors.secundaryGreen,
-  type: "balls",
-  height: "64px",
-  width: "64px",
-}))`
-  transform: translate(50%, -50%);
-  top: 50%;
-  right: 50%;
-  position: fixed;
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`
+
+export const Button = styled.button`
+  max-width: 300px;
+  min-width: 200px;
+  height: 35px;
+  min-height: 35px;
+  margin: 10px 0px;
+  padding: 4px;
+  margin-left: 5px;
+
+  border-radius: 4px;
+  background-color: ${(props) => props.theme.colors.tertiaryGray};
+  color: ${(props) => props.theme.colors.primaryGray};
+  cursor: pointer;
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.quaternaryGray};
+  }
 `;

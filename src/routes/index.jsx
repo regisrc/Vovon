@@ -10,6 +10,9 @@ const Dashboard = lazy(() => import('../pages/Dashboard'));
 const List = lazy(() => import('../pages/List'));
 const Config = lazy(() => import('../pages/Config'));
 const MedicalRecord = lazy(() => import('../pages/MedicalRecord'));
+const AddAlerts = lazy(() => import('../pages/AddAlerts'));
+const VerifyAlerts = lazy(() => import('../pages/VerifyAlerts'));
+const ManualInput = lazy(() => import('../pages/ManualInput'));
 
 const Loading = (
   <div>
@@ -27,6 +30,9 @@ const Routes = () => (
         <PrivateRoute exact path="/list" component={List} />
         <PrivateRoute exact path="/config" component={Config} />
         <PrivateRoute path="/medicalRecord/:id" component={MedicalRecord} />
+        <PrivateRoute exact path="/addAlerts" component={AddAlerts} />
+        <PrivateRoute exact path="/verifyAlerts" component={VerifyAlerts} />
+        <PrivateRoute path="/manualInput/:id" component={ManualInput} />
       </Switch>
     </AuthDataProvider>
   </Suspense>
