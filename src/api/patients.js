@@ -141,4 +141,22 @@ export const Admeasurement = (data, token) => {
   return request(body, headers);
 };
 
+export const Updates = () => {
+  const { token } = useAuthDataContext();
+
+  const url = `updates`;
+
+  const headers = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const request = async (headers) => {
+    return await axios.get(url, headers);
+  };
+
+  return request(headers);
+};
+
 export default PatientsSWR;

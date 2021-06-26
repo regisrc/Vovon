@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import useSound from "use-sound";
 
@@ -14,14 +14,8 @@ import {
 import Header from "../../components/Header";
 import Card from "../../components/Card";
 import { Loading } from "../../components/LoadingComponent";
-import PatientsSWR from "../../api/patients";
+import PatientsSWR, { Updates } from "../../api/patients";
 import sound from "../../assets/sound.mp3";
-
-const messages = [
-  { message: "Claudio revisou TCS (9 min atrás)" },
-  { message: "Claudio revisou TCS (15 min atrás)" },
-  { message: "Claudio revisou TCS (20 min atrás)" },
-];
 
 const Dashboard = () => {
   const { data } = PatientsSWR();
@@ -29,12 +23,21 @@ const Dashboard = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [soundOff] = useState(localStorage.getItem("sound") === "true");
   const [alertOff] = useState(localStorage.getItem("alert") === "true");
+  const [update, setUpdate] = useState()
+  const updatesValues = useRef(Updates())
 
   useEffect(() => {
     setIsMounted(true);
 
     return () => setIsMounted(false);
   }, []);
+
+  useEffect(() => {
+    if (!isMounted) return
+
+    updatesValues.current.then(value => setUpdate(value.data))
+
+  }, [isMounted]);
 
   useEffect(() => {
     if (!isMounted) return;
@@ -94,10 +97,10 @@ const Dashboard = () => {
           </DashboardContainer>
           <CardsContainer>
             <CardsContainerTitle>Ultimas atualizações</CardsContainerTitle>
-            {messages &&
-              messages.map((Message, index) => (
+            {update &&
+              update.map((Update, index) => (
                 <Notes key={index}>
-                  <NoteText>{Message.message}</NoteText>
+                  <NoteText>{Update.descricaoAtualizacao}{` - ${Update.minutosAtras} min atrás`}</NoteText>
                 </Notes>
               ))}
           </CardsContainer>
