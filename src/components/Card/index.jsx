@@ -98,7 +98,7 @@ const Header = ({user}) => {
   }
 
   return (
-    <Container onClick={() => history.push(`medicalRecord/${user.id_wearable}`)} status={setCardColor(user.warningLevel, user.status)}>
+    <Container onClick={() => history.push(`medicalRecord/${user.id}`)} status={setCardColor(user.warningLevel, user.status)}>
       <Section>
         <NameStatusArea>  
           <Status status={setStatusColor(user.warningLevel, user.status)} />
